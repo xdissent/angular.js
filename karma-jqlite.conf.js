@@ -1,14 +1,16 @@
-var angularFiles = require(__dirname + '/angularFiles.js');
-
-files = angularFiles.mergeFiles(JASMINE, JASMINE_ADAPTER, 'jstd');
-exclude = ['**/*jasmine*/**', '**/*jstd*/**'].concat(angularFiles.files.jstdExclude);
-
-autoWatch = true;
-logLevel = LOG_INFO;
-logColors = true;
-browsers = ['Chrome'];
-
-junitReporter = {
-  outputFile: 'test_out/jqlite.xml',
-  suite: 'jqLite'
+module.exports = function(karma) {
+  var angularFiles = require(__dirname + '/angularFiles.js');
+  karma.configure({
+    frameworks: ['jasmine'],
+    files: angularFiles.mergeFiles('jstd'),
+    exclude: ['**/*jstd*/**'].concat(angularFiles.files.jstdExclude),
+    autoWatch: true,
+    logLevel: karma.LOG_INFO,
+    logColors: true,
+    browsers: ['Chrome'],
+    junitReporter: {
+      outputFile: 'test_out/jqlite.xml',
+      suite: 'jqLite'
+    }
+  });
 };
